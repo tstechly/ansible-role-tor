@@ -1,2 +1,3 @@
 ---
-# defaults file for {{ role_name }}
+tor_service_enabled: false
+tor_service_state: stopped

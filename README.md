@@ -5,6 +5,10 @@
 
 Install and configure tor
 
+based mainly on 
+https://computingforgeeks.com/installing-tor-browser-on-linux-mint-ubuntu/
+
+
 Example Playbook
 ----------------
 
@@ -29,7 +33,11 @@ Role Variables
 These variables are set in `defaults/main.yml`:
 ```yaml
 ---
-# defaults file for tor```
+# By default the service is disabled
+tor_service_enabled: false
+tor_service_state: stopped
+
+```
 
 
 Compatibility

@@ -1,6 +1,119 @@
 ---
-# example installation
-- name: install vim
+
+- name: Install the latest version of Tor and torsocks [Debian Based]
+  tags: install
   apt:
-    name: vim
+    name: ['tor', 'torsocks', 'torbrowser-launcher']
     update_cache: true
+    state: present
+  become: true
+
+- name: start tor
+  tags: install
+  service:
+    name: tor
+    enabled: "{{ tor_service_enabled }}"
+    state: "{{ tor_service_state }}"
+
+- name: Uninstall tor components [Debian]
+  tags: uninstall
+  apt:
+    name: ['tor', 'torsocks', 'torbrowser-launcher']
+    update_cache: true
+    state: absent
+  become: true
+
+
+    
+#- name: install apt apt-transport-https
+#  apt: 
+#    name: apt-transport-https
+#    update_cache: no
+
+#- name: "Add Tor repo GPG signing key to Apt"
+#  apt_key:
+#    url: "https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc"
+#    id: A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89
+#    state: present
+
+#- name: update update
+#  raw: apt-get update
+
+#- name: get expired
+#  raw: apt-key list
+#  register: apt_key_list
+
+#- debug:
+#    var: apt_key_list
+
+
+#- name: "Add Tor repo to Apt sources"
+# apt_repository:
+#   repo: "deb https://deb.torproject.org/torproject.org bionic main"
+#    update_cache: false
+#    validate_certs: false
+#    state: present
+#  register: debug_text
+
+#- debug:
+#    var: debug_text
+
+#- name: update update
+#  raw: apt-get update
+
+
+#- name: "Install Tor packages"
+#  apt:
+#    update_cache: false
+#    name: "{{ tor_packages }}"
+#  vars:
+#    tor_packages:
+#    - tor
+#    - deb.torproject.org-keyring
+
+
+
+
+#- name: add repos
+#  apt_repository:
+#    repo: deb https://deb.torproject.org/torproject.org {{ ansible_distribution_release }} main
+
+
+#- name: add repo (raw)
+ # raw: |
+#    tee /etc/apt/sources.list.d/tor.list
+#    deb https://deb.torproject.org/torproject.org bionic main
+#    deb-src https://deb.torproject.org/torproject.org bionic main
+#    EOF
+
+
+#- name: add apt https
+#  apt:
+#    name: apt-transport-https
+
+#- name: add repo
+#  apt_repository:
+#    repo: deb https://deb.torproject.org/torproject.org bionic main
+#    update_cache: yes
+#    validate_certs: false
+#    state: present
+
+  
+
+#    state: present
+
+#- name: add src repo
+#  apt_repository: 
+#    repo: deb-src https://deb.torproject.org/torproject.org bionic main
+#    filename: tor
+#    state: present
+
+
+##- name: import gpg
+##  raw: curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | sudo gpg --import; gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
+
+##- name: install
+##  raw: apt-get update; apt-get install tor deb.torproject.org-keyring
+
+##- name: install browser
+##  raw: apt-get install torbrowser-launcher

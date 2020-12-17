@@ -1,5 +1,15 @@
 ---
-# Example installation
-- name: install vim
+- name: Install the latest version of Tor and torsocks [CentOS Based]
+  tags: install
   yum:
-    name: vim
+    name: ['tor', 'torsocks']
+    update_cache: true
+    state: present
+  become: true
+
+- name: manage tor service
+  tags: install
+  service:
+    name: tor
+    enabled: "{{ tor_service_enabled }}"
+    state: "{{ tor_service_state }}"
