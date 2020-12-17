@@ -24,7 +24,6 @@
   become: true
 
 
-    
 #- name: install apt apt-transport-https
 #  apt: 
 #    name: apt-transport-https
@@ -71,9 +70,6 @@
 #    - tor
 #    - deb.torproject.org-keyring
 
-
-
-
 #- name: add repos
 #  apt_repository:
 #    repo: deb https://deb.torproject.org/torproject.org {{ ansible_distribution_release }} main
@@ -97,8 +93,6 @@
 #    update_cache: yes
 #    validate_certs: false
 #    state: present
-
-  
 
 #    state: present
 
