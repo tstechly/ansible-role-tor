@@ -16,7 +16,7 @@
     state: "{{ tor_service_state }}"
 
 - name: Uninstall tor components [Debian]
-  tags: uninstall
+  tags: [never, uninstall]
   apt:
     name: ['tor', 'torsocks', 'torbrowser-launcher']
     update_cache: true
